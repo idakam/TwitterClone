@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>New Tweet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div th:replace="fragments/head"></div>
+</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/navbar"></div>
+    <div class="jumbotron col-md-8 col-md-offset-2">
+        <h2>New Tweet</h2><br/>
+        <form th:action="@{/tweets}" th:object="${tweet}" method="post" autocomplete="off">
+            <div class="form-group">
+                <textarea rows="5" th:field="*{message}" placeholder="What's happening?" class="form-control"></textarea>
+                <label th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="validation-message"></label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-md btn-success btn-block" name="Submit" value="Submit" type="Submit">Tweet it!</button>
+            </div>
+            <div th:if="${successMessage}">
+                <h3><span class="text-success" th:utext="${successMessage}"></span></h3>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
